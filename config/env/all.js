@@ -7,6 +7,15 @@ module.exports = {
         keywords: 'Hack Partners Hackpanel'
     },
     assets: {
+        lib: {
+            js: [
+                "app/node_modules/jquery/jquery.min.js",
+                "app/node_modules/angular/angular.min.js",
+                "app/node_modules/angular-ui-router/angular-ui-router.min.js",
+                "app/node_modules/oclazyload/dist/ocLazyLoad.min.js",
+                "node_modules/angular-mocks/angular-mocks.js"
+            ]
+        },
         css: [
 			'app/application.css',
             'app/application.min.css'
@@ -51,16 +60,18 @@ module.exports = {
             'app/**/services/*.service.js',
 
             // Add rest of files
-            "app/**/*.js",
+            "app/core/**/*.js",
+            "app/modules/**/*.js",
 
             // Exclude any non-project files
             "!app/assets/**/*.js",
             "!app/app.js",
-            "!app/node_modules/**/*.js"
+            "!app/node_modules/**/*.js",
+            "!app/**/*.test.js"
         ],
         tests: [
-			'app/**/*test*.js',
-            "!app/node_modules"
+            'app/core/**/*test.js',
+			'app/modules/**/*test.js',
         ]
     }
 };

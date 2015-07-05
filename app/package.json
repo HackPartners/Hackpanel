@@ -8,7 +8,7 @@
   	"url": "http://hackpartners.com"
   },
   "window": {
-    "toolbar": true,
+    "toolbar": false,
     "width": 800,
     "height": 600
   },

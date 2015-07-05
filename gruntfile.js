@@ -158,12 +158,24 @@ module.exports = function (grunt) {
             },
             src: ['./app/**/*']
         },
+        karma: {
+          unit: {
+            configFile: 'karma.conf.js',
+            singleRun: true
+          }
+        },
         env: {
             test: {
                 NODE_ENV: 'test'
             },
             secure: {
                 NODE_ENV: 'secure'
+            },
+            development: {
+                NODE_ENV: 'development'
+            },
+            production: {
+                NODE_ENV: 'production'
             }
         }
     });
@@ -189,7 +201,7 @@ module.exports = function (grunt) {
     grunt.registerTask('dev', ['default', 'watch']);
 
     // Run Task
-    grunt.registerTask('rundev', ['default', 'concurrent:runwatch'])
+    grunt.registerTask('rundev', ['env:development', 'default', 'concurrent:runwatch'])
 
     // Lint task(s).
     grunt.registerTask('lint', ['jslint', 'lesslint']);
@@ -197,8 +209,11 @@ module.exports = function (grunt) {
     // Build task(s).
     grunt.registerTask('build', ['less', 'cssmin', 'concat', 'uglify']);
 
+    // Run unit tests
+    grunt.registerTask('test',  ['default', 'karma']);
+
     // Install all
-    grunt.registerTask('package', ['default', 'shell:install', 'nodewebkit'])
+    grunt.registerTask('package', ['env:production', 'default', 'shell:install', 'nodewebkit']);
 
     // Run configuration
     grunt.task.run('loadConfig');
