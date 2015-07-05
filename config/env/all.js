@@ -40,7 +40,8 @@ module.exports = {
             'app/core/core.module.js',
 
             // Adding config
-            'app/core/config/*.config.js',
+            'app/core/**/*.config.js',
+            'app/modules/**/*.config.js',
 
             // Adding all modules
             'app/core/**/*.module.js',

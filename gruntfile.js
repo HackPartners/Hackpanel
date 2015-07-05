@@ -198,7 +198,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['less', 'cssmin', 'concat', 'uglify']);
 
     // Install all
-    grunt.registerTask('package', ['build', 'shell:install', 'nodewebkit'])
+    grunt.registerTask('package', ['default', 'shell:install', 'nodewebkit'])
 
     // Run configuration
     grunt.task.run('loadConfig');
