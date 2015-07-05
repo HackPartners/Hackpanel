@@ -2,30 +2,35 @@
 <html>
 <head>
 
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Hackpanel</title>
+    <title>Hackpanel</title>
 
-	<link rel="stylesheet" href="./application.min.css">
+    <link rel="stylesheet" href="./application.min.css">
 
 </head>
 <body ng-app="Hackpanel">
-	<div id="hackpanel-main-container" ui-view></div>
-	
-	<!-- EXTERNAL DEPENDENCIES -->
-	<script src="./node_modules/angular/angular.min.js"></script>
-	<script src="./node_modules/angular-ui-router/build/angular-ui-router.min.js"></script>
-	<script src="./node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
-	<script src="./node_modules/jquery/jquery.min.js"></script>
+    <div id="hackpanel-main-container" ui-view></div>
+    
+    <!-- EXTERNAL DEPENDENCIES -->
+    <script src="./node_modules/angular/angular.min.js"></script>
+    <script src="./node_modules/angular-ui-router/build/angular-ui-router.min.js"></script>
+    <script src="./node_modules/oclazyload/dist/ocLazyLoad.min.js"></script>
+    <script src="./node_modules/jquery/jquery.min.js"></script>
 
-	<!-- MAIN NWJS APP -->
-	<script src="./app.js"></script>
+    <!-- MAIN NWJS APP -->
+    <script src="./app.js"></script>
 
-	<!-- INTERNAL HACKSTRAP -->
-	<script src="./hackstrap.min.js"></script>
+    <!-- INTERNAL HACKSTRAP -->
+    <script src="./hackstrap.min.js"></script>
 
-	<!-- INTERNAL DEPENDENCIES -->
-	<script src="./application.min.js"></script>
+    <!-- INTERNAL DEPENDENCIES -->
+    <script src="./application.min.js"></script>
+
+    <script>
+        angular.module("Hackpanel")
+            .constant("WEBHOST", "http://localhost:8000");
+    </script>
 </body>
 </html>

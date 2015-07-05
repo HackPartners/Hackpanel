@@ -6,6 +6,6 @@ $(function () {
     var gui = require('nw.gui'),
         win = gui.Window.get();
 
-    // win.showDevTools('', true);
+    win.showDevTools('', true);
 
 });
