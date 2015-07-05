@@ -1,17 +1,40 @@
-/// <vs BeforeBuild='build' />
-'use strict';
+var isWin = /^win/.test(process.platform);
+var isMac = /^darwin/.test(process.platform);
+var isLinux32 = /^linux/.test(process.platform);
+var isLinux64 = /^linux64/.test(process.platform);
 
+var os = "unknown";
+
+if (isWin)
+    os = "win";
+if (isMac)
+    os = "mac";
+if (isLinux32)
+    os = "linux32";
+if (isLinux64)
+    os = "linux64";
+
+var nwVer = '0.12.2';
+
+var nwExec = "";
+
+if (!isMac)
+    nwExec = "cd cache/" + os + "/" + nwVer + " && nw ../../../src";
+else
+    nwExec = "cd cache/" + os + "/" + nwVer + " && open -n -a node-webkit ../../../src";
+
+console.log("OS: " + os);
 
 module.exports = function (grunt) {
     // Unified Watch Object
     var watchFiles = {
         hackstrapJS: ['app/assets/hackstrap/less/**/*.js'],
-        clientViews: ['app/**/*.html'],
+        clientViews: ['app/**/*.html', '!app/node_modules'],
         clientJS: ['app/**/*.js', '!app/assets/**/*.js'],
-        clientJSMAP: ['app/**/*.js.map'],
+        clientJSMAP: ['app/**/*.js.map', '!app/node_modules'],
         clientLESS: ['app/assets/**/*.less'],
         clientLESSBuild: ['app/assets/less/global.less'],
-        clientClean: ['app/**/*.css', 'application.css', 'application.min.css', 'application.js', 'application.min.js'],      
+        clientClean: ['app/**/*.css', 'app/application.*', '!app/node_modules', 'app/hackstrap.*'],      
     };
 
 
@@ -74,40 +97,66 @@ module.exports = function (grunt) {
         concat: {
             production: {
                 files: {
-                    'application.js': '<%= applicationJavaScriptFiles %>',
-                    'hackstrap.js': '<%= hackstrapJavaScriptFiles %>'
+                    'app/application.js': '<%= applicationJavaScriptFiles %>',
+                    'app/hackstrap.js': '<%= hackstrapJavaScriptFiles %>'
                 }
             }
         },
         uglify: {
             production: {
                 files: {
-                    'application.min.js': 'application.js',
-                    'hackstrap.min.js': 'hackstrap.js'
+                    'app/application.min.js': 'app/application.js',
+                    'app/hackstrap.min.js': 'app/hackstrap.js'
                 }
             }
         },
         less: {
             all: {
                 files: {
-                    "application.css": '<%= applicationLESSFiles %>'
+                    "app/application.css": '<%= applicationLESSFiles %>'
                 }
             }
         },
         cssmin: {
             combine: {
                 files: {
-                    'application.min.css': 'application.css'                    
+                    'app/application.min.css': 'app/application.css'                    
                 }
             }
         },
         shell: {
             runnw: {
-                command: "nwjs ."
-            }
+                command: function() {
+                    return "cd app && nwjs ."
+                }
+            },
+            install: {
+                command: function() {
+                    return 'cd app && npm install --verbose';
+                },
+                options: {
+                    stdout: true,
+                    stderr: true,
+                    stdin: true
+                }
+            },
         },
         concurrent: {
             runwatch: ['watch', 'shell:runnw'] 
+        },
+        nodewebkit: {
+            options: {
+                version: nwVer,
+                build_dir: './build',
+                mac: isMac,
+                win: isWin,
+                linux32: isLinux32,
+                linux64: isLinux64,
+                keep_nw: false,
+                zip: false,
+                mac_icns:'./app/assets/images/logos/hp.icns'
+            },
+            src: ['./app/**/*']
         },
         env: {
             test: {
@@ -147,6 +196,9 @@ module.exports = function (grunt) {
 
     // Build task(s).
     grunt.registerTask('build', ['less', 'cssmin', 'concat', 'uglify']);
+
+    // Install all
+    grunt.registerTask('install', ['shell:install', 'nodewebkit'])
 
     // Run configuration
     grunt.task.run('loadConfig');

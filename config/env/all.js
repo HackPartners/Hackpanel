@@ -8,8 +8,8 @@ module.exports = {
     },
     assets: {
         css: [
-			'application.css',
-            'application.min.css'
+			'app/application.css',
+            'app/application.min.css'
         ],
         hackstrapJS: [
             'app/assets/hackstrap/js/transition.js',
@@ -32,6 +32,8 @@ module.exports = {
 
             'app/assets/hackstrap/less/hackstrap.less',
             'app/assets/less/global.less',
+
+            "!app/node_modules/**/*.less"
         ],
         js: [
             // Add core module
@@ -52,10 +54,12 @@ module.exports = {
 
             // Exclude any non-project files
             "!app/assets/**/*.js",
-            "!app/app.js"
+            "!app/app.js",
+            "!app/node_modules/**/*.js"
         ],
         tests: [
-			'app/**/*test*.js'
+			'app/**/*test*.js',
+            "!app/node_modules"
         ]
     }
 };

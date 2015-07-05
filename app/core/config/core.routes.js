@@ -14,11 +14,11 @@ angular.module("Hackpanel")
                     url: "/hackpanel",
                     controller: "hackpanel.hackpanelController",
                     controllerAs: "hackpanelController",
-                    templateUrl: "app/core/hackpanel/hackpanel.html"
+                    templateUrl: "core/hackpanel/hackpanel.html"
                 })
                 .state('login', {
                     url: "/login",
-                    templateUrl: "app/core/users/login/login.html"
+                    templateUrl: "core/users/login/login.html"
                 });
         }
     ]);

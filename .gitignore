@@ -4,3 +4,7 @@
 *.map.js
 *.css
 node_modules
+app/application.*
+app/hackstrap.*
+cache
+build

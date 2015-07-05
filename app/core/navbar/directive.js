@@ -6,7 +6,7 @@ angular.module("Hackpanel")
 
         return {
             restrict: "E",
-            templateUrl: "app/core/navbar/navbar.html",
+            templateUrl: "core/navbar/navbar.html",
             controller: "hackpanel.navbarController",
             controllerAs: "navbarController"
         };
