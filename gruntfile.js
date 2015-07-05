@@ -127,7 +127,7 @@ module.exports = function (grunt) {
         shell: {
             runnw: {
                 command: function() {
-                    return "cd app && nwjs ."
+                    return "cd app && nw ."
                 }
             },
             install: {
@@ -198,7 +198,7 @@ module.exports = function (grunt) {
     grunt.registerTask('build', ['less', 'cssmin', 'concat', 'uglify']);
 
     // Install all
-    grunt.registerTask('install', ['shell:install', 'nodewebkit'])
+    grunt.registerTask('package', ['build', 'shell:install', 'nodewebkit'])
 
     // Run configuration
     grunt.task.run('loadConfig');
