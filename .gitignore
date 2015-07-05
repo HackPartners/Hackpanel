@@ -1,0 +1,6 @@
+.DS_Store
+
+# Igore binary files
+*.map.js
+*.css
+node_modules
