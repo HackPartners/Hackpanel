@@ -24,13 +24,7 @@ angular.module("Hackpanel")
                 $rootScope.hackpanelAddresses[$rootScope.currentTab] = address;
             };
         }
-    ])
-    .filter('trustAsResourceUrl', ['$sce', function ($sce) {
-        "use strict";
-        return function (val) {
-            return $sce.trustAsResourceUrl(val);
-        };
-    }]);
+    ]);
 
 /*global angular*/
 
@@ -56,6 +50,17 @@ angular.module("Hackpanel")
                 });
         }
     ]);
+
+/*global angular, console*/
+
+
+angular.module("Hackpanel")
+    .filter('trustedExternalUrl', ['$sce', function ($sce) {
+        "use strict";
+        return function (val) {
+            return $sce.trustAsResourceUrl(val);
+        };
+    }]);
 
 /*global angular, console*/
 

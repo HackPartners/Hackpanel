@@ -14,10 +14,4 @@ angular.module("Hackpanel")
                 $rootScope.hackpanelAddresses[$rootScope.currentTab] = address;
             };
         }
-    ])
-    .filter('trustAsResourceUrl', ['$sce', function ($sce) {
-        "use strict";
-        return function (val) {
-            return $sce.trustAsResourceUrl(val);
-        };
-    }]);
+    ]);
